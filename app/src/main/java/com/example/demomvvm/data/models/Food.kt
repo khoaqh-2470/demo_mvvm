@@ -1,4 +1,4 @@
-package com.example.demomvvm.models
+package com.example.demomvvm.data.models
 
 data class Food(
     val id: Int,
