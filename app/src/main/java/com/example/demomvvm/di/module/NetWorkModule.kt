@@ -12,6 +12,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 val mainModuleViewModel = module {
     viewModel {
@@ -37,8 +38,10 @@ val retrofitModule = module {
     fun provideGson() = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create()
 
     fun provideHttpClient(): OkHttpClient {
-        val okHttpClientBuild = OkHttpClient.Builder()
-
+        val okHttpClientBuild = OkHttpClient.Builder().apply {
+            connectTimeout(3000, TimeUnit.SECONDS)
+            readTimeout(3000, TimeUnit.SECONDS)
+        }
         return okHttpClientBuild.build()
     }
 

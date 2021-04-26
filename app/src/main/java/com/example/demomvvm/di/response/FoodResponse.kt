@@ -20,5 +20,5 @@ data class FoodResponse(
 
     @SerializedName("data")
     @Expose
-    val foods: List<Food>?
+    val foods: MutableList<Food>
 )
