@@ -1,44 +1,64 @@
 package com.example.demomvvm.ui.main
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.os.Handler
+import android.os.Looper
+import androidx.lifecycle.*
+import com.example.demomvvm.R
 import com.example.demomvvm.data.models.Food
 import com.example.demomvvm.data.reponsitory.MainRepository
-import com.example.demomvvm.di.response.FoodResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.demomvvm.utils.Constants
+import com.example.demomvvm.utils.LoadMoreRecyclerViewListener
+import com.example.demomvvm.utils.Resource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class MainViewModel(private val mainRepository: MainRepository) : ViewModel(),
-    Callback<FoodResponse> {
+    LoadMoreRecyclerViewListener {
 
-    private val _isLoading = MutableLiveData<Boolean>()
+    private var foodAll = mutableListOf<Food>()
+    private var countItem = Constants.LIMIT_ITEM
+
+    private val _foods = MutableLiveData<MutableList<Food?>>()
+    val foods: LiveData<MutableList<Food?>>
+        get() = _foods
+
+    private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    private val _foods = MutableLiveData<List<Food>>()
-    val foods: LiveData<List<Food>>
-        get() = _foods
-
     init {
-        getAllFoods()
-    }
-
-    private fun getAllFoods() {
-        _isLoading.value = true
-        mainRepository.getAllFoods().enqueue(this)
-    }
-
-    override fun onResponse(call: Call<FoodResponse>, response: Response<FoodResponse>) {
-        if (response.isSuccessful) {
-            _foods.value = response.body()?.foods
+        viewModelScope.launch(Dispatchers.IO) {
+            loadAllFoods()
         }
     }
 
-    override fun onFailure(call: Call<FoodResponse>, t: Throwable) {
-        _isLoading.value = false
-        Log.d("nnn", "onFailure: ${t.message}")
+    fun loadAllFoods() = liveData {
+        countItem = Constants.LIMIT_ITEM
+        foodAll.clear()
+        emit(Resource.loading(data = null))
+        foodAll = mainRepository.getAllFoods().foods
+        _foods.value = foodAll.take(countItem) as MutableList<Food?>
+        _foods.value!!.add(null)
+        try {
+            emit(Resource.success(data = foods))
+        } catch (ex: Exception) {
+            emit(Resource.error(data = null, message = ex.message.toString()))
+        }
+    }
+
+    override fun onLoadData() {
+        if (countItem >= foodAll.size) {
+            return
+        }
+        _isLoading.value = true
+        Handler(Looper.getMainLooper()).postDelayed({
+            _isLoading.value = false
+            countItem += Constants.LIMIT_ITEM
+            _foods.value = foodAll.take(countItem) as MutableList<Food?>
+            if (countItem <= foodAll.size) {
+                _foods.value?.add(null)
+            }
+        }, 2000)
     }
 }
