@@ -1,10 +1,6 @@
 package com.example.demomvvm.base
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity : AppCompatActivity() {
