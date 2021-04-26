@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/quach.hong.khoa/AndroidStudioProjects/DemoMVVM/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/item_load_more.xml",
+        "source": "/home/quach.hong.khoa/AndroidStudioProjects/DemoMVVM/app/src/main/res/layout/item_load_more.xml"
+    },
+    {
+        "merged": "/home/quach.hong.khoa/AndroidStudioProjects/DemoMVVM/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/home/quach.hong.khoa/AndroidStudioProjects/DemoMVVM/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/quach.hong.khoa/AndroidStudioProjects/DemoMVVM/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/item_foods.xml",
+        "source": "/home/quach.hong.khoa/AndroidStudioProjects/DemoMVVM/app/src/main/res/layout/item_foods.xml"
+    }
+]

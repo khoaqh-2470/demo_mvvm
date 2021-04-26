@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/quach.hong.khoa/AndroidStudioProjects/DemoMVVM/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/home/quach.hong.khoa/.gradle/caches/transforms-2/files-2.1/a2d00763b8275e1aa6bafc0dfe27fafa/core-1.5.0-rc01/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/home/quach.hong.khoa/.gradle/caches/transforms-2/files-2.1/318a1943f107d711a83c392a249418da/appcompat-1.3.0-rc01/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        }
+    ]
+}

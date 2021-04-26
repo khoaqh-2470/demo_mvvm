@@ -1,0 +1,29 @@
+com/example/demomvvm/DataBindingTriggerClass.java
+ com.example.demomvvm.DataBindingTriggerClass
+com/example/demomvvm/databinding/ItemFoodsBindingImpl.java
+ com.example.demomvvm.databinding.ItemFoodsBindingImpl
+com/example/demomvvm/databinding/ItemLoadMoreBinding.java
+ com.example.demomvvm.databinding.ItemLoadMoreBinding
+androidx/databinding/DataBinderMapperImpl.java
+ androidx.databinding.DataBinderMapperImpl
+com/example/demomvvm/BuildConfig.java
+ com.example.demomvvm.BuildConfig
+androidx/databinding/library/baseAdapters/BR.java
+ androidx.databinding.library.baseAdapters.BR
+com/example/demomvvm/databinding/ItemFoodsBinding.java
+ com.example.demomvvm.databinding.ItemFoodsBinding
+com/example/demomvvm/BR.java
+ com.example.demomvvm.BR
+com/example/demomvvm/databinding/ItemLoadMoreBindingImpl.java
+ com.example.demomvvm.databinding.ItemLoadMoreBindingImpl
+androidx/databinding/DataBindingComponent.java
+ androidx.databinding.DataBindingComponent
+com/example/demomvvm/databinding/ActivityMainBinding.java
+ com.example.demomvvm.databinding.ActivityMainBinding
+com/example/demomvvm/databinding/ActivityMainBindingImpl.java
+ com.example.demomvvm.databinding.ActivityMainBindingImpl
+ com.example.demomvvm.databinding.ActivityMainBindingImpl$LoadMoreRecyclerViewListenerImpl
+com/example/demomvvm/DataBinderMapperImpl.java
+ com.example.demomvvm.DataBinderMapperImpl
+ com.example.demomvvm.DataBinderMapperImpl$InnerBrLookup
+ com.example.demomvvm.DataBinderMapperImpl$InnerLayoutIdLookup

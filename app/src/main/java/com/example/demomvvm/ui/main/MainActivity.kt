@@ -1,23 +1,72 @@
 package com.example.demomvvm.ui.main
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.demomvvm.R
+import com.example.demomvvm.databinding.ActivityMainBinding
+import com.example.demomvvm.extensions.toGone
+import com.example.demomvvm.extensions.toVisible
+import com.example.demomvvm.utils.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel by viewModel<MainViewModel>()
+    private val mainAdapter by lazy { MainAdapter() }
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+            .apply {
+                lifecycleOwner = this@MainActivity
+                viewModel = mainViewModel
+            }
+        binding.mainAdapter = mainAdapter
+        onLoadData()
+        onEvent()
+    }
 
+    private fun onEvent() {
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.swipeRefresh.isRefreshing = false
+            onLoadData()
+        }
+    }
+
+    private fun onLoadData() {
         mainViewModel.foods.observe(this, Observer {
-            it.toString()
-            Log.d("nnn", "onResponse: $it")
+            mainAdapter.submitList(it)
+        })
+
+        mainViewModel.loadAllFoods().observe(this, Observer {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    binding.recyclerViewFoods.toVisible()
+                    binding.progressBar.toGone()
+                    binding.textError.toGone()
+                }
+                Status.ERROR -> {
+                    binding.recyclerViewFoods.toGone()
+                    binding.progressBar.toGone()
+                    binding.textError.toVisible()
+                    binding.textError.text = it.message
+                }
+                Status.LOADING -> {
+                    binding.recyclerViewFoods.toGone()
+                    binding.progressBar.toVisible()
+                    binding.textError.toGone()
+                }
+            }
         })
     }
 }
